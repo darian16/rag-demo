@@ -1,0 +1,9 @@
+{
+  "id": "/",
+  "short_name": "Demo AI Rag",
+  "name": "Demo AI Rag",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

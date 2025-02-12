@@ -1,0 +1,167 @@
+.message {
+  margin-top: 10px;
+  position: relative;
+}
+
+.message.question {
+  float: right;
+  width: max-content;
+  max-width: 70%;
+  background: var(--info_color);
+  color: white;
+
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+
+  border-radius: 10px;
+}
+
+.message.response {
+  width: 100%;
+  max-width: 100%;
+  background: none;
+  color: var(--text_color);
+  padding: 25px;
+  padding-left: 30px;
+}
+
+.message.response svg {
+  position: absolute;
+  left: 0;
+  top: 30px;
+  color: var(--secondary_color) !important;
+}
+
+.message .read-status-icon {
+  color: white;
+  font-size: 15px;
+  margin-bottom: 10px;
+  position: absolute;
+  width: max-content;
+  bottom: 0;
+}
+
+.message .read-status-icon-1 {
+  left: 15px;
+}
+
+.message .read-status-icon-2 {
+  left: 20px;
+}
+
+.message.response .content-action {
+  position: absolute;
+  width: max-content;
+  font-size: 15px;
+  color: var(--text_color) !important;
+  top: unset !important;
+  bottom: 2px;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.message.response .content-action:hover {
+  opacity: 1;
+}
+
+.message.response .content-copy {
+  left: 30px;
+}
+
+.message.response .content-share {
+  left: 55px;
+}
+
+.message.response .content-trace {
+  left: 80px;
+}
+
+.message.response .content-close {
+  left: 105px;
+  font-size: 19px;
+  bottom: 0;
+}
+
+.message.question ::selection {
+  color: white;
+  background: var(--primary_color);
+}
+
+.message.response ::selection {
+  color: white;
+  background: var(--secondary_color);
+}
+
+.message .content {
+  margin: 0;
+  padding: 0;
+  margin-top: 7px;
+}
+
+.message .close {
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 0 !important;
+}
+
+.message .close svg {
+  position: unset !important;
+}
+
+.message.neutral .close {
+  color: #4d4d4d;
+}
+
+.ps__rail-y {
+  left: unset !important;
+  right: 0 !important;
+}
+
+.message .action {
+  margin-top: 7px;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px;
+  opacity: 0.85;
+  background: var(--primary_color);
+  color: white;
+  transition: all ease 0.25s;
+  cursor: pointer;
+}
+
+.message .action:hover {
+  background: var(--secondary_color);
+}
+
+.typing {
+  position: relative;
+  width: max-content;
+  margin-top: 25px;
+}
+
+.typing svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--neutral_color);
+}
+
+.typing img {
+  width: 100%;
+  height: 20px !important;
+  margin-left: 21px;
+  margin-top: 3px;
+  text-align: center;
+}
+
+.typing img {
+}

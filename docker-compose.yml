@@ -1,0 +1,27 @@
+version: '3'
+services:
+#  backend:
+#    image: demo/backend
+#    container_name: backend
+#    networks:
+#      - local_net
+#    ports:
+#      - "5000:8080"
+  frontend:
+    image: demo/frontend
+    container_name: frontend
+    networks:
+      - local_net
+    ports:
+      - "3000:8080"
+#    depends_on:
+#      - backend
+    env_file:
+      - frontend.env
+networks:
+  local_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
