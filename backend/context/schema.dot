@@ -1,0 +1,456 @@
+
+digraph structs {
+
+
+rankdir="LR"
+
+
+node [shape=none]
+
+collection_metadata [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>collection_metadata</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="collection_id_to">🔑</TD>
+                    <TD PORT="collection_id_from">collection_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="key_to">🔑</TD>
+                    <TD PORT="key_from">key</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="str_value_to">&nbsp;</TD>
+                    <TD PORT="str_value_from">str_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="int_value_to">&nbsp;</TD>
+                    <TD PORT="int_value_from">int_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="float_value_to">&nbsp;</TD>
+                    <TD PORT="float_value_from">float_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="bool_value_to">&nbsp;</TD>
+                    <TD PORT="bool_value_from">bool_value</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+collections [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>collections</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="name_to">&nbsp;</TD>
+                    <TD PORT="name_from">name</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="dimension_to">&nbsp;</TD>
+                    <TD PORT="dimension_from">dimension</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="database_id_to">&nbsp;</TD>
+                    <TD PORT="database_id_from">database_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="config_json_str_to">&nbsp;</TD>
+                    <TD PORT="config_json_str_from">config_json_str</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+databases [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>databases</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="name_to">&nbsp;</TD>
+                    <TD PORT="name_from">name</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="tenant_id_to">&nbsp;</TD>
+                    <TD PORT="tenant_id_from">tenant_id</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+embedding_metadata [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>embedding_metadata</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="key_to">🔑</TD>
+                    <TD PORT="key_from">key</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="string_value_to">&nbsp;</TD>
+                    <TD PORT="string_value_from">string_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="int_value_to">&nbsp;</TD>
+                    <TD PORT="int_value_from">int_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="float_value_to">&nbsp;</TD>
+                    <TD PORT="float_value_from">float_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="bool_value_to">&nbsp;</TD>
+                    <TD PORT="bool_value_from">bool_value</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+embeddings [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>embeddings</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="segment_id_to">&nbsp;</TD>
+                    <TD PORT="segment_id_from">segment_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="embedding_id_to">&nbsp;</TD>
+                    <TD PORT="embedding_id_from">embedding_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="seq_id_to">&nbsp;</TD>
+                    <TD PORT="seq_id_from">seq_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="created_at_to">&nbsp;</TD>
+                    <TD PORT="created_at_from">created_at</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+embeddings_queue [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>embeddings_queue</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="seq_id_to">🔑</TD>
+                    <TD PORT="seq_id_from">seq_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="created_at_to">&nbsp;</TD>
+                    <TD PORT="created_at_from">created_at</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="operation_to">&nbsp;</TD>
+                    <TD PORT="operation_from">operation</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="topic_to">&nbsp;</TD>
+                    <TD PORT="topic_from">topic</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="id_to">&nbsp;</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="vector_to">&nbsp;</TD>
+                    <TD PORT="vector_from">vector</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="encoding_to">&nbsp;</TD>
+                    <TD PORT="encoding_from">encoding</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="metadata_to">&nbsp;</TD>
+                    <TD PORT="metadata_from">metadata</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+embeddings_queue_config [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>embeddings_queue_config</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="config_json_str_to">&nbsp;</TD>
+                    <TD PORT="config_json_str_from">config_json_str</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+maintenance_log [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>maintenance_log</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="timestamp_to">&nbsp;</TD>
+                    <TD PORT="timestamp_from">timestamp</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="operation_to">&nbsp;</TD>
+                    <TD PORT="operation_from">operation</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+max_seq_id [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>max_seq_id</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="segment_id_to">🔑</TD>
+                    <TD PORT="segment_id_from">segment_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="seq_id_to">&nbsp;</TD>
+                    <TD PORT="seq_id_from">seq_id</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+migrations [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>migrations</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="dir_to">🔑</TD>
+                    <TD PORT="dir_from">dir</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="version_to">🔑</TD>
+                    <TD PORT="version_from">version</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="filename_to">&nbsp;</TD>
+                    <TD PORT="filename_from">filename</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="sql_to">&nbsp;</TD>
+                    <TD PORT="sql_from">sql</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="hash_to">&nbsp;</TD>
+                    <TD PORT="hash_from">hash</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+segment_metadata [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>segment_metadata</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="segment_id_to">🔑</TD>
+                    <TD PORT="segment_id_from">segment_id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="key_to">🔑</TD>
+                    <TD PORT="key_from">key</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="str_value_to">&nbsp;</TD>
+                    <TD PORT="str_value_from">str_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="int_value_to">&nbsp;</TD>
+                    <TD PORT="int_value_from">int_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="float_value_to">&nbsp;</TD>
+                    <TD PORT="float_value_from">float_value</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="bool_value_to">&nbsp;</TD>
+                    <TD PORT="bool_value_from">bool_value</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+segments [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>segments</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="type_to">&nbsp;</TD>
+                    <TD PORT="type_from">type</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="scope_to">&nbsp;</TD>
+                    <TD PORT="scope_from">scope</TD>
+                </TR>
+            
+
+                <TR>
+                    <TD PORT="collection_to">&nbsp;</TD>
+                    <TD PORT="collection_from">collection</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+tenants [label=<
+            <TABLE BORDER="0" CELLSPACING="0" CELLBORDER="1">
+                <TR>
+                    <TD COLSPAN="2"><B>tenants</B></TD>
+                </TR>
+            
+                <TR>
+                    <TD PORT="id_to">🔑</TD>
+                    <TD PORT="id_from">id</TD>
+                </TR>
+            
+            </TABLE>
+        >];
+        
+embedding_metadata:id_from:e -> embeddings:id_to:w
+collection_metadata:collection_id_from:e -> collections:id_to:w
+segment_metadata:segment_id_from:e -> segments:id_to:w
+databases:tenant_id_from:e -> tenants:id_to:w
+collections:database_id_from:e -> databases:id_to:w
+
+}
