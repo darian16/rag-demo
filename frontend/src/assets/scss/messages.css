@@ -1,5 +1,5 @@
 .message {
-  margin-top: 10px;
+  margin-top: 0;
   position: relative;
 }
 
@@ -91,13 +91,13 @@
 
 .message.response ::selection {
   color: white;
-  background: var(--secondary_color);
+  background: var(--secondary_color) !important;
 }
 
 .message .content {
   margin: 0;
   padding: 0;
-  margin-top: 7px;
+  margin-top: 5px;
 }
 
 .message .close {
@@ -163,5 +163,29 @@
   text-align: center;
 }
 
-.typing img {
+.message.response .content {
+  width: max-content;
+  max-width: 100%;
+  cursor: pointer;
+  transition: all ease 0.25s;
+}
+
+ul.context_sources {
+  padding-left: 0;
+}
+
+ul.context_sources ::selection {
+  color: white;
+  background: var(--secondary_color);
+}
+
+ul.context_sources li {
+  margin-top: 7px;
+}
+
+ul.context_sources p {
+  margin: 0;
+  margin-top: 5px;
+  font-style: italic;
+  opacity: 0.85;
 }

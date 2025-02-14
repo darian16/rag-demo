@@ -37,6 +37,10 @@ resource "google_cloud_run_service" "backend" {
             memory = "512Mi"
           }
         }
+        env {
+          name = "OPENAI_API_KEY"
+          value = ""
+        }
       }
     }
   }

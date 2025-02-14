@@ -4,9 +4,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+
+import ApiService from "services/ApiService";
 //------------------------------------------------------------------------------------
 
-import Logo from "ui-component/Logo";
+import Help from "ui-component/Help";
 import Loading from "ui-component/Loading";
 import Typing from "ui-component/Typing";
 
@@ -15,11 +17,7 @@ import Message from "./Message";
 //------------------------------------------------------------------------------------
 
 const Dashboard = () => {
-  const [messages, set_messages] = useState([
-    // {id: 'message-1', kind: 'question', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', read: true},
-    // {id: 'message-2', kind: 'response', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac sodales id, porttitor vitae est. Donec laoreet rutrum libero sed pharetra. Donec vel egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac sodales id, porttitor vitae est. Donec laoreet rutrum libero sed pharetra. Duis a arcu convallis, gravida purus eget, mollis diam.', read: true}
-  ]);
-
+  const [messages, set_messages] = useState([]);
   const [disabled_chatbot, set_disabled_chatbot] = useState(false);
   const [is_generating, set_is_generating] = useState(false);
   const [scroll_bar, set_scroll_bar] = useState(null);
@@ -41,20 +39,42 @@ const Dashboard = () => {
       message.read = true;
       set_is_generating(true);
       scroll_bar.scrollTop = scroll_bar.scrollHeight;
-    }, 1000);
 
-    // Simulate generate message response...
-    setTimeout(function() {
-      set_is_generating(false);
+      // Generate message response...
+      let params = {
+        question: message.content,
+        sandbox: 0
+      };
 
-      onRegisterMessage({
-        id: 'demo-ai-rag-message-' + Date.now(),
-        kind: 'response',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac sodales id, porttitor vitae est. Donec laoreet rutrum libero sed pharetra. Donec vel egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac sodales id, porttitor vitae est. Donec laoreet rutrum libero sed pharetra. Duis a arcu convallis, gravida purus eget, mollis diam.'
-      });
+      ApiService.postEndpoint(null, window.env.BACKEND_BASE_URL, 'chat', params,
+        (response) => {
+          set_is_generating(false);
 
-      set_disabled_chatbot(false);
-    }, 3000);
+          onRegisterMessage({
+            id: 'demo-ai-rag-message-' + Date.now(),
+            kind: 'response',
+            content: response.response,
+            context_sources: response.context_sources,
+            read: true
+          });
+
+          set_disabled_chatbot(false);
+        },
+        (status, message) => {
+          set_is_generating(false);
+
+          onRegisterMessage({
+            id: 'demo-ai-rag-message-' + Date.now(),
+            kind: 'response',
+            content: 'Our servers are busy right now. Try again in a few seconds.',
+            context_sources: null,
+            read: true
+          });
+
+          set_disabled_chatbot(false);
+        }
+      );
+    }, 500);
   }
 
   const quitMessage = (message) => {
@@ -65,7 +85,7 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-      <Logo />
+      <Help />
 
       <PerfectScrollbar containerRef={ref => set_scroll_bar(ref)}>
         <div id="demo-ai-rag-container">

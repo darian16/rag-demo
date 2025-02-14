@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
 from openai_llm.chat import chatToLlm
 # -------------------------------------------------------------
 
@@ -20,12 +23,25 @@ app = FastAPI(
   openapi_tags=tags_metadata
 )
 
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
+
 @app.get("/", tags=["index"])
-def index():
+async def index():
   return {"service": "RAG Demo for contextual AI interactions."}
 # -------------------------------------------------------------
 
+class ChatParams(BaseModel):
+  question: str
+  sandbox: int = 0
+# -------------------------------------------------------------
+
 @app.post("/chat", tags=["chat"])
-def chat(question: str, sandbox: int = 0):
-  return {"response": chatToLlm(question, sandbox)}
+async def chat(params: ChatParams):
+  return chatToLlm(params.question, params.sandbox)
 # -------------------------------------------------------------

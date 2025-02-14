@@ -7,6 +7,8 @@ services:
 #      - local_net
 #    ports:
 #      - "5000:8080"
+#    env_file:
+#      - backend.env
   frontend:
     image: demo/frontend
     container_name: frontend

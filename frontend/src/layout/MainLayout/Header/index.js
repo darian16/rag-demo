@@ -1,13 +1,12 @@
-// material-ui
-
-// project imports
+import React from 'react';
 import LogoSection from "../LogoSection";
-
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = () => {
   return (
-    <LogoSection />
+    <React.Fragment>
+      <LogoSection />
+    </React.Fragment>
   );
 };
 
