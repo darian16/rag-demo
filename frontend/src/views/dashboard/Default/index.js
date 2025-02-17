@@ -97,7 +97,7 @@ const Dashboard = () => {
           {
             messages &&
             messages.length > 0 &&
-            <h1 className="chat-title">ConocoPhillips Company Chat</h1>
+            <h1 className="chat-title">RAG-powered survey analysis tool</h1>
           }
           
           {

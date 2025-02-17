@@ -39,6 +39,8 @@
   - [Frontend Severless settings recommendations](#frontend-severless-settings-recommendations)
 - [Backend](#backend)
   - [Services](#services)
+    * [Index](#index)
+    * [Chat](#chat)
   - [Backend dependencies](#backend-dependencies)
   - [Backend Severless settings recommendations](#backend-severless-settings-recommendations)
 
@@ -48,23 +50,61 @@
 - **Backend**: FastAPI.
 - **Database**: Chroma.
 - **Infrastructure**: Google Cloud Platform (GCP), Terraform, Makefile, Docker, Docker Compose, CloudRun for serverless architecture, Firebase.
+- **Quality**: ESlint, Jest, pylint, pytest, pycov, SNYK.
+- **Topic modeling**: Latent Dirichlet Allocation (LDA) for topic modeling and Topic-Based Chunking.
 
 ## RAG agent workflow
-
+<div align="center">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/workflow.svg" alt="Workflow" width="100%">
+</div>
 
 ## Preview
-
+<div align="center">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="80%">
+</div>
 
 ## Sample of queries
 
 
 ## Services topology diagram
-
+<div align="center">
+  <img src="topology.svg" alt="Services topology diagram" width="80%">
+</div>
 
 ## Frontend
 
 ### Frontend dependencies
-
+- "@emotion/cache": "^11.9.3"
+- "@emotion/react": "^11.9.3"
+- "@emotion/styled": "^11.9.3"
+- "@mui/icons-material": "^5.8.4"
+- "@mui/lab": "^5.0.0-alpha.88"
+- "@mui/material": "^5.8.6"
+- "@mui/system": "^5.8.6"
+- "@mui/utils": "^5.8.6"
+- "@tabler/icons": "^1.72.0"
+- "axios": "^1.3.6"
+- "crypto-js": "^4.0.0"
+- "formik": "^2.2.9"
+- "framer-motion": "^6.3.16"
+- "i18next": "^22.4.13"
+- "node-polyfill-webpack-plugin": "^2.0.1"
+- "prop-types": "^15.8.1"
+- "react": "^18.2.0"
+- "react-detect-offline": "^2.4.5"
+- "react-device-detect": "^2.2.2"
+- "react-dom": "^18.2.0"
+- "react-gtm-module": "^2.0.11"
+- "react-i18next": "^12.2.0"
+- "react-loading-skeleton": "^3.2.1"
+- "react-perfect-scrollbar": "^1.5.8"
+- "react-redux": "^8.0.2"
+- "react-router": "6.3.0"
+- "react-router-dom": "6.3.0"
+- "react-scripts": "^5.0.1"
+- "react-tooltip": "^5.28.0"
+- "redux": "^4.2.0"
+- "yup": "^0.32.11"
 
 ### Frontend severless settings recommendations
 - Memory (Memory to allocate to each container instance): 128Mb
@@ -78,9 +118,33 @@
 
 ### Services
 
+### Index
+**Category:** Endpoint<br/>
+**Relative URL:** /<br/>
+**Description:** App description.
+
+### Chat
+**Category:** Endpoint<br/>
+**Relative URL:** /chat<br/>
+**Description:** Context OpenAI chat. For offline behavior use sandbox=1 parameter.
 
 ### Backend dependencies
-- 
+- python3.11
+- python3-pip
+- python3.11-distutils
+- python3.11-dev
+- langchain==0.3.15
+- onnxruntime==1.20.1
+- chromadb==0.6.3
+- langchain-chroma==0.2.1
+- langchain_community==0.3.15
+- langgraph==0.2.67
+- pypdf==5.1.0
+- tiktoken==0.8.0
+- gpt4all==2.8.2
+- langchain-openai==0.3.5
+- "fastapi[standard]"
+- pysqlite3-binary
 
 ### Backend severless settings recommendations
 - Memory (Memory to allocate to each container instance): 512Mb

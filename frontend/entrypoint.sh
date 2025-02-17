@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 envsubst < /usr/share/nginx/html/env.tmp.js > /usr/share/nginx/html/env.js \
 
-checksum="$(printenv | grep AI_RAG)"
+checksum="$(printenv | grep BUILD_NUMBER)"
 
 export WORKBOX_ID="$(echo -n "$checksum" | md5sum )"
 

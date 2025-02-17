@@ -42,7 +42,7 @@ push:
 clean:
 	$(CLEAN_IMAGES)
 compose_up:
-	cd frontend;$(MAKE) up SERVICE_NAME=frontend;cd ..;cd backend
+	cd frontend;$(MAKE) up SERVICE_NAME=frontend;cd ..;cd backend;$(MAKE) up SERVICE_NAME=backend
 	docker-compose up -d
 	docker ps
 compose_down:

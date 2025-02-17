@@ -14,8 +14,8 @@ const ChatBot = ({show_welcome, onRegisterMessage, disabled}) => {
 
   const onInputChange = () => {
     let value = document.getElementById('question').value;
-    set_disabled_send(value.length <= 3);
-    set_disabled_voice(value.length <= 3);
+    set_disabled_send(value.length <= 2);
+    set_disabled_voice(value.length <= 2);
   }
 
   const onSubmit = (event) => {
@@ -70,13 +70,6 @@ const ChatBot = ({show_welcome, onRegisterMessage, disabled}) => {
             </IconButton>
           </div>
         </div>
-        
-        {
-          show_welcome &&
-          <p className="brand">
-            2025 &copy; Powered by Conoco Phillips
-          </p>
-        }
       </div>
 
       <DemoTooltip id={"send-tooltip"} />
