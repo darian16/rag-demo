@@ -20,17 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install fastapi
-        pip install openai
-        pip install langchain
-        pip install langchain_chroma
-        pip install langchain_community
-        pip install langchain_openai
-        pip install langgraph
-        pip install gpt4all
-        pip install pypdf
-        pip install tiktoken
-        pip install pylint
+        python -m pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')

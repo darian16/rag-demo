@@ -60,6 +60,7 @@
   bottom: 2px;
   cursor: pointer;
   opacity: 0.75;
+  outline: none !important;
 }
 
 .message.response .content-action:hover {

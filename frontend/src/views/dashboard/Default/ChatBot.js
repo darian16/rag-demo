@@ -14,8 +14,8 @@ const ChatBot = ({show_welcome, onRegisterMessage, disabled}) => {
 
   const onInputChange = () => {
     let value = document.getElementById('question').value;
-    set_disabled_send(value.length <= 2);
-    set_disabled_voice(value.length <= 2);
+    set_disabled_send(value.length <= 1);
+    set_disabled_voice(value.length <= 1);
   }
 
   const onSubmit = (event) => {

@@ -1,3 +1,8 @@
+import sys
+
+if sys.platform != 'win32':
+  sys.modules['sqlite3'] = __import__('pysqlite3')
+
 import os
 from os.path import join
 
@@ -9,6 +14,8 @@ from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from pydantic import BaseModel
 from langgraph.graph import START, END
 from langgraph.graph import StateGraph
+
+from langchain_core.runnables.graph import MermaidDrawMethod
 # -------------------------------------------------------------
 
 class GraphStateSandBox(BaseModel):
@@ -168,6 +175,12 @@ def chatToLlm(question, sandbox):
   graph.add_edge("dont_know_node", END)
 
   graph = graph.compile()
+
+  if sandbox == 1:
+    graph_image = graph.get_graph().draw_mermaid_png(draw_method=MermaidDrawMethod.API)
+    with open(join(os.path.dirname(__file__), '..', 'graph.png'), "wb") as graph_png:
+      graph_png.write(graph_image)
+
   result = graph.invoke(state)
 
   return {

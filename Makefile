@@ -12,9 +12,9 @@ GCR_BACKEND = ko
 GCR_PROJECT = gcr-project
 GAR_FRONTEND = ko
 GAR_BACKEND = ok
-GAR_ZONE = eu-north1
-GAR_PROJECT = gar-project
-GAR_REPOSITORY = repo
+GAR_ZONE = us-west1
+GAR_PROJECT = customs-dashboard-p-78d99
+GAR_REPOSITORY = ais
 CLEAN_IMAGES = docker rmi $(docker images --filter "dangling=true" -q --no-trunc) -f >/dev/null 2>&1 && echo none-images-cleaned || echo skiped-none-images-clean|head -n1|awk '{print $$1}'
 
 export IMAGES_PREFIX

@@ -22,9 +22,18 @@
   <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_linter.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/frontend_linter.yml/badge.svg" alt="Frontend linter (ESlint)">
   </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_tests.yml">
+    <img src="https://github.com/darian16/rag-demo/blob/develop/coverage/badge-lines.svg" alt="Frontend coverage (Jest)">
+  </a>
   </br>
   <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml/badge.svg" alt="Backend linter (pylint)">
+  </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
+  </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
+    <img src="https://github.com/darian16/rag-demo/badges/coverage.svg" alt="Backend coverage (pycov)">
   </a>
 </p>
 
@@ -55,16 +64,19 @@
 
 ## RAG agent workflow
 <div align="center">
-  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/workflow.svg" alt="Workflow" width="100%">
+  <img src="https://github.com/darian16/rag-demo/blob/develop/backend/graph.png" alt="Workflow" width="auto">
 </div>
 
 ## Preview
 <div align="center">
-  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="80%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
 
 ## Sample of queries
-
+- *Please tell me about the recognitions and achievements in 2023.*
+- *Who is Mr. Murti?*
+- *What is Cash from operations for?*
+- *How many years of relationship does ConocoPhillips have with Qatar?*
 
 ## Services topology diagram
 <div align="center">
@@ -126,7 +138,7 @@
 ### Chat
 **Category:** Endpoint<br/>
 **Relative URL:** /chat<br/>
-**Description:** Context OpenAI chat. For offline behavior use sandbox=1 parameter.
+**Description:** In-context ChatGPT-based chat.
 
 ### Backend dependencies
 - python3.11
@@ -143,8 +155,9 @@
 - tiktoken==0.8.0
 - gpt4all==2.8.2
 - langchain-openai==0.3.5
-- "fastapi[standard]"
 - pysqlite3-binary
+- fastapi[standard]
+- pylint == 3.3.4
 
 ### Backend severless settings recommendations
 - Memory (Memory to allocate to each container instance): 512Mb

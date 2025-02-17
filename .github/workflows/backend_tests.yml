@@ -1,0 +1,29 @@
+name: Backend tests (pytest)
+on: [pull_request]
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+defaults:
+  run:
+    working-directory: ./backend
+jobs:
+  backend_tests:
+    runs-on: ubuntu-22.04
+    name: Unit tests
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.6'
+      - id: run-tests
+        uses: JotaFan/pycoverage@v1.0.0
+        with:
+          cov-omit-list: tests/*
+          cov-threshold-single: 85
+          cov-threshold-total: 90
+          async-tests: true
+          poetry-version: 1.4.2
+          package-extras: dev,tests
+          github_token: ${{ secrets.github_token }}
+          working_branch: ${{ steps.extract_branch.outputs.branch }}

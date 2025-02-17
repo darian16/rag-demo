@@ -12,7 +12,7 @@ tags_metadata = [
   },
   {
     "name": "chat",
-    "description": "Context OpenAI chat. For offline behavior use sandbox=1 parameter."
+    "description": "In-context ChatGPT-based chat."
   }
 ]
 

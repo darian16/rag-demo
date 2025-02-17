@@ -1,42 +1,34 @@
-FROM ruby:3.1.1
+FROM ubuntu:22.04
 
-# Adding postgres lib
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update
+RUN apt upgrade -y
+RUN apt install software-properties-common -y
+RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt update
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt install -y nano
-RUN apt install -y libpq-dev
-RUN apt install -y tini
-RUN apt install -y gettext
-RUN apt install -y supervisor
+RUN apt install python3.11 -y
+RUN rm /usr/bin/python3
+RUN ln -s /usr/bin/python3.11 /usr/bin/python3
+RUN python3 --version
 
-# Set an environment variable where the Rails app is installed to inside of Docker image:
-ENV RAILS_ROOT /srv/ba/current
-RUN mkdir -p $RAILS_ROOT
+RUN apt install python3-pip -y
+RUN apt install python3.11-distutils -y
+RUN apt install python3.11-dev -y
+RUN apt install wget -y
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3 get-pip.py
+RUN python3 -m pip install --upgrade pip
 
-# Set working directory, where the commands will be ran:
-WORKDIR $RAILS_ROOT
-
-# Adding project files
-RUN rm -rf /srv/ba/current
-COPY Gemfile /srv/ba/current/Gemfile
-COPY Gemfile.lock /srv/ba/current/Gemfile.lock
-RUN gem install bundler:2.4.13
-RUN bundle install --jobs 20 --retry 5
-
-COPY . .
-RUN mkdir -p ./tmp/pids
-RUN mkdir -p ./log
-RUN mkdir -p /tmp/sockets
-
-# Run server
+RUN mkdir /srv/www
+RUN mkdir /srv/www/app
+COPY . /srv/www/app
+RUN python3 -m pip install -r /srv/www/app/requirements.txt
+RUN python3 /srv/www/app/init_embebber.py
 EXPOSE 8080
 
-# Fix protobuf error on cloudtasker
-COPY cloudtasker_fix/worker_handler.rb /usr/local/rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/cloudtasker-0.13.0/lib/cloudtasker/worker_handler.rb
-COPY cloudtasker_fix/google_cloud_task_v2.rb /usr/local/rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/cloudtasker-0.13.0/lib/cloudtasker/backend/google_cloud_task_v2.rb
-
-# Entrypoint
-RUN sed -i 's/\r$//' /srv/ba/current/entrypoint.sh
-RUN chmod +x /srv/ba/current/entrypoint.sh
-ENTRYPOINT ["bash", "/srv/ba/current/entrypoint.sh"]
+COPY entrypoint.sh /srv/www/app/entrypoint.sh
+RUN sed -i 's/\r$//' /srv/www/app/entrypoint.sh
+RUN chmod +x /srv/www/app/entrypoint.sh
+ENTRYPOINT ["bash", "/srv/www/app/entrypoint.sh"]
