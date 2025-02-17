@@ -1,0 +1,29 @@
+.env-container {
+  padding: 3px 8px;
+  background-color: #ffffffd9;
+  gap: 0.5rem;
+  border-radius: 0  0 7px 7px;
+  align-items: center;
+  font-size: 12px;
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  
+  transition: top ease-in-out 0.5s;
+  box-shadow: 1px 3px 7px 1px rgba(0, 0, 0, 0.432);
+  -webkit-box-shadow: 1px 3px 7px 1px rgba(0, 0, 0, 0.363);
+  -moz-box-shadow: 1px 3px 7px 1px rgba(0, 0, 0, 0.425);
+
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+}
+
+.env-container.hide {
+  top: -20px;
+}
+
+.env-icon {
+  font-size: 12px;
+  margin-right: -1px;
+}

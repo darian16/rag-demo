@@ -1,0 +1,37 @@
+name: Frontend deploy to Firebase Hosting for production on merge to master
+'on':
+  push:
+    branches:
+      - master
+
+defaults:
+  run:
+    working-directory: ./frontend
+
+jobs:
+  production_deploy:
+    name: Deploy project ${{ matrix.project }} (production)
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+          - project: rag-demo
+            firebaseServiceAccount: FIREBASE_SERVICE_ACCOUNT
+            projectId: rag-demo-33b16
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 20.10.0
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.10.0
+      - name: yarn install and build
+        run: yarn install && yarn run build && rm -f ./build/precache-manifest.*.js && cp ./firebase.env.js ./build/env.js
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets[matrix.firebaseServiceAccount] }}'
+          channelId: live
+          projectId: '${{ matrix.projectId }}'
+          entryPoint: "./frontend"

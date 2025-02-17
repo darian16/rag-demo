@@ -1,0 +1,12 @@
+dev.Dockerfile
+tmp/*
+log/*
+__pycache__/*
+openai_llm/__pycache__/*
+
+context/*
+!context/chroma.sqlite3
+!context/*.py
+!context/*.dot
+!context/*.svg
+!context/*.sql
