@@ -11,11 +11,10 @@ from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
+from langchain_core.runnables.graph import MermaidDrawMethod
 from pydantic import BaseModel
 from langgraph.graph import START, END
 from langgraph.graph import StateGraph
-
-from langchain_core.runnables.graph import MermaidDrawMethod
 # -------------------------------------------------------------
 
 class GraphStateSandBox(BaseModel):
