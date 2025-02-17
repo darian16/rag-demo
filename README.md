@@ -22,18 +22,8 @@
   <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_linter.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/frontend_linter.yml/badge.svg" alt="Frontend linter (ESlint)">
   </a>
-  <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_tests.yml">
-    <img src="https://github.com/darian16/rag-demo/blob/develop/coverage/badge-lines.svg" alt="Frontend coverage (Jest)">
-  </a>
-  </br>
   <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml/badge.svg" alt="Backend linter (pylint)">
-  </a>
-  <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
-    <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
-  </a>
-  <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
-    <img src="https://github.com/darian16/rag-demo/badges/coverage.svg" alt="Backend coverage (pycov)">
   </a>
 </p>
 
