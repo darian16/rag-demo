@@ -10,3 +10,6 @@ context/*
 !context/*.dot
 !context/*.svg
 !context/*.sql
+
+*.bat
+htmlcov/*

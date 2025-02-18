@@ -7,7 +7,7 @@
   float: right;
   width: max-content;
   max-width: 70%;
-  background: var(--info_color);
+  background: var(--secondary_color);
   color: white;
 
   padding-left: 15px;

@@ -8,7 +8,7 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Diagram auto-generator
       run: |
         docker run --rm --tty -v $PWD:/data dbeniamine/docker-compose-viz-mermaid -v -p -v -dLR -M -otopology.svg

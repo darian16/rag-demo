@@ -19,7 +19,7 @@ jobs:
             firebaseServiceAccount: FIREBASE_SERVICE_ACCOUNT
             projectId: rag-demo-33b16
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Use Node.js 20.10.0
