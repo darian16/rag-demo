@@ -25,6 +25,9 @@
   <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_linter.yml/badge.svg" alt="Backend linter (pylint)">
   </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
+  </a>
 </p>
 
 ## Table of Contents
@@ -48,6 +51,7 @@
   <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
 This software demonstrates Retrieval Augmented Generation (RAG) for in-context learning using specific PDF documents:
+
 - 2023 Analyst & Investor Meeting.
 - 2024 Proxy Statement.
 
@@ -150,6 +154,8 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 - pysqlite3-binary
 - fastapi[standard]
 - pylint == 3.3.4
+- pytest == 8.3.4
+- pytest-cov == 6.0.0
 
 ### Backend severless settings recommendations
 - Memory (Memory to allocate to each container instance): 512Mb
