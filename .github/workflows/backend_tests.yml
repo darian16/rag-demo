@@ -1,0 +1,26 @@
+name: Backend tests (pytest)
+on: [pull_request]
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+defaults:
+  run:
+    working-directory: ./backend
+jobs:
+  backend_tests:
+    runs-on: ubuntu-22.04
+    name: Unit tests
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python init_embebber.py
+      - name: Run tests with pytest
+        run: |
+          python -m pytest -v --cov=main --cov-report=html tests/
