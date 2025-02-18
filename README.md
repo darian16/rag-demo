@@ -28,9 +28,9 @@
 </p>
 
 ## Table of Contents
+- [Overview](#overview)
 - [Tech Stack](#tech-stack)
 - [RAG agent workflow](#rag-agent-workflow)
-- [Preview](#preview)
 - [Sample of queries](#sample-of-queries)
 - [Services topology diagram](#services-topology-diagram)
 - [Frontend](#frontend)
@@ -43,23 +43,25 @@
   - [Backend dependencies](#backend-dependencies)
   - [Backend Severless settings recommendations](#backend-severless-settings-recommendations)
 
+## Overview
+<div align="center">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
+</div>
+This software demonstrates Retrieval Augmented Generation (RAG) for in-context learning using specific PDF documents:
+- 2023 Analyst & Investor Meeting.
+- 2024 Proxy Statement.
+
 ## Tech Stack
 - **LLMops**: LanghGraph.
 - **Frontend**: ReacJS, Material.
 - **Backend**: FastAPI.
 - **Database**: Chroma.
 - **Infrastructure**: Google Cloud Platform (GCP), Terraform, Makefile, Docker, Docker Compose, CloudRun for serverless architecture, Firebase.
-- **Quality**: ESlint, Jest, pylint, pytest, pycov, SNYK.
-- **Topic modeling**: Latent Dirichlet Allocation (LDA) for topic modeling and Topic-Based Chunking.
+- **Quality**: ESlint, pylint, pytest, pycov.
 
 ## RAG agent workflow
 <div align="center">
   <img src="https://github.com/darian16/rag-demo/blob/develop/backend/graph.png" alt="Workflow" width="auto">
-</div>
-
-## Preview
-<div align="center">
-  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
 
 ## Sample of queries

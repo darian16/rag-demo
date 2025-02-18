@@ -13,3 +13,5 @@ pylint == 3.3.4
 grandalf == 0.8
 ipython == 8.32.0
 pysqlite3-binary; platform_system != "Windows"
+pytest == 8.3.4
+pytest-cov == 6.0.0

@@ -9,7 +9,7 @@ jobs:
   frontend_linter:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js 20.10.0
         uses: actions/setup-node@v1
         with:
