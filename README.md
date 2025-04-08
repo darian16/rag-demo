@@ -1,8 +1,6 @@
 <div align="center">
-  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/bounce_insights_logo.svg" alt="Bounce Insights" width="100px">
-  <br>
   <h1><img width="40px" src="https://github.com/darian16/rag-demo/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered survey analysis tool</h1>
-  <strong>Demo for Bounce Insights</strong>
+  <strong>Demo</strong>
 </div>
 <br>
 <p align="center">
