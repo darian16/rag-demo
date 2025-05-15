@@ -45,6 +45,7 @@
   - [Backend Severless settings recommendations](#backend-severless-settings-recommendations)
 
 ## Overview
+This project involves developing a web application that enables users to explore, analyze, and compare two market research reports through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application must ensure all AI-generated results are traceable, allowing users to double-click or access the original source data for verification and deeper analysis.
 <div align="center">
   <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
