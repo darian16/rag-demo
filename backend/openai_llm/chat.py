@@ -26,10 +26,11 @@ class GraphStateSandBox(BaseModel):
 
 class GraphState(BaseModel):
   sandbox: int = 0
-  llm: ChatOpenAI = None
   question: str = ""
   documents: list = []
   generation: str = ""
+
+  llm: ChatOpenAI = None
 # -------------------------------------------------------------
 
 def getLlmModel(sandbox):

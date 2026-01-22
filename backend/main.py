@@ -19,7 +19,7 @@ tags_metadata = [
 app = FastAPI(
   title="RAG Demo",
   description="RAG Demo for contextual AI interactions.",
-  version="2025.02.15",
+  version="2026.01.20",
   openapi_tags=tags_metadata
 )
 
