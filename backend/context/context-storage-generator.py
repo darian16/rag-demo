@@ -14,7 +14,6 @@ def calc_int_percent(value, total):
 # -------------------------------------------------------------
 
 def genVectorStoreContext():
-  files_dir = join(os.path.dirname(__file__), 'pages')
   vectorial_dir = join(os.path.dirname(__file__))
   collection_name = 'store'
   gpt_embebber = GPT4AllEmbeddings(gpt4all_kwargs= {'allow_download':False})
@@ -38,40 +37,45 @@ def genVectorStoreContext():
 
   print("Retrieving Context documents...")
 
-  for x_file in listdir(files_dir):
-    print(f'   => {x_file}...')
+  files_dirs = [
+    join(os.path.dirname(__file__), 'Customs Export Procedures Manual'),
+    join(os.path.dirname(__file__), 'Customs Import Procedures Manual')
+  ]
 
-    metadata = x_file.split('-page')
-    document_name = metadata[0] + '.pdf'
-    document_page = int(metadata[1].replace('.pdf', ''))
+  for x_file_dir in files_dirs:
+    for x_file in listdir(x_file_dir):
+      metadata = x_file.split('-')
+      document_name = x_file_dir
+      document_page = int(metadata[1].replace('.pdf', ''))
+      print(f'{document_name} => {document_page}')
 
-    loader = PyPDFLoader(join(files_dir, x_file))
+      loader = PyPDFLoader(join(x_file_dir, x_file))
 
-    text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-      chunk_size=250,
-      chunk_overlap=25
-    )
+      text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+        chunk_size=250,
+        chunk_overlap=25
+      )
 
-    documents = []
-    documents.extend(loader.load())
-    documents = text_splitter.split_documents(documents)
-    sections_count = len(documents)
+      documents = []
+      documents.extend(loader.load())
+      documents = text_splitter.split_documents(documents)
+      sections_count = len(documents)
 
-    if sections_count > 0:
-      prev_section = 0
+      if sections_count > 0:
+        prev_section = 0
 
-      for x_index, x_document in enumerate(documents):
-        current_section = x_index+1
+        for x_index, x_document in enumerate(documents):
+          current_section = x_index+1
 
-        x_document.metadata['document_name'] = document_name
-        x_document.metadata['document_page'] = document_page
-        x_document.metadata['page_section_percent'] = f'{calc_int_percent(prev_section, sections_count)}-{calc_int_percent(current_section, sections_count)}'
+          x_document.metadata['document_name'] = document_name
+          x_document.metadata['document_page'] = document_page
+          x_document.metadata['page_section_percent'] = f'{calc_int_percent(prev_section, sections_count)}-{calc_int_percent(current_section, sections_count)}'
 
-        prev_section = current_section
+          prev_section = current_section
 
-      vectorstore.add_documents(documents)
-    else:
-      print("No documents found...")
+        vectorstore.add_documents(documents)
+      else:
+        print("No documents found...")
 
   print("Context vectorial database has been created!")
   print("")
@@ -81,6 +85,6 @@ def genVectorStoreContext():
 # -------------------------------------------------------------
 
 retriever = genVectorStoreContext()
-print(f'Related documents for test question: {len(retriever.invoke("What is Cash from operations for?"))}')
-#print(f'Related documents for test question: {retriever.invoke("what is Cash from operations for?")}')
+documents = retriever.invoke("Please tell me how to declare the goods")
+print(f'Related documents for test question: {len(documents)}')
 # -------------------------------------------------------------

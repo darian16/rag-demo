@@ -1,10 +1,14 @@
 dev.Dockerfile
 tmp/*
 log/*
+
+.pytest_cache/*
 __pycache__/*
 openai_llm/__pycache__/*
 
 context/*
+!context/Customs Export Procedures Manual
+!context/Customs Import Procedures Manual
 !context/chroma.sqlite3
 !context/*.py
 !context/*.dot
