@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://github.com/nivalcode/demo2/blob/master/.github/assets/logo.png" alt="Earground" width="300px">
   <br>
-  <h1><img width="40px" src="https://github.com/nivalcode/demo2/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered AIS/AES analysis tool</h1>
+  <h1><img width="40px" src="https://github.com/nivalcode/demo2/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered AIS AES analysis tool</h1>
   <strong>Demo for the project Earground</strong>
 </div>
 <br>
@@ -167,4 +167,4 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 - Minimum number of instances (Autoscaling): 1
 - Maximum number of instances (Autoscaling): 5
 
-[🔼 Back to top](#-rag-powered-ais/aes-analysis-tool)
+[🔼 Back to top](#-rag-powered-ais-aes-analysis-tool)
