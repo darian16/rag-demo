@@ -17,3 +17,5 @@ context/*
 
 *.bat
 htmlcov/*
+
+backend.env

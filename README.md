@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://github.com/nivalcode/demo2/blob/master/.github/assets/logo.png" alt="Earground" width="300px">
+  <img src="https://github.com/darian16/rag_demo/blob/master/.github/assets/logo.png" alt="Earground" width="300px">
   <br>
-  <h1><img width="40px" src="https://github.com/nivalcode/demo2/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered AIS AES analysis tool</h1>
+  <h1><img width="40px" src="https://github.com/darian16/rag_demo/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered AIS AES analysis tool</h1>
   <strong>Demo for the project Earground</strong>
 </div>
 <br>
@@ -9,24 +9,24 @@
   <a href="https://rag-demo-33b16.web.app">
     <img src="https://img.shields.io/badge/Status-Demo-blue.svg" alt="Status">
   </a>
-  <a href="https://github.com/nivalcode/demo2/blob/master/LICENSE">
+  <a href="https://github.com/darian16/rag_demo/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License (MIT)">
   </a>
-  <a href="https://github.com/nivalcode/demo2/blob/master/README.md">
+  <a href="https://github.com/darian16/rag_demo/blob/master/README.md">
     <img src="https://img.shields.io/badge/Documentation-Readme.md-blue.svg" alt="Documentation (Readme.md)">
   </a>
-  <a href="https://github.com/nivalcode/demo2/security/dependabot">
+  <a href="https://github.com/darian16/rag_demo/security/dependabot">
     <img src="https://img.shields.io/badge/Dependencies-Dependabot-blue.svg" alt="Dependencies (Dependabot)">
   </a>
   </br>
-  <a href="https://github.com/nivalcode/demo2/actions/workflows/frontend_linter.yml">
-    <img src="https://github.com/nivalcode/demo2/actions/workflows/frontend_linter.yml/badge.svg" alt="Frontend linter (ESlint)">
+  <a href="https://github.com/darian16/rag_demo/actions/workflows/frontend_linter.yml">
+    <img src="https://github.com/darian16/rag_demo/actions/workflows/frontend_linter.yml/badge.svg" alt="Frontend linter (ESlint)">
   </a>
-  <a href="https://github.com/nivalcode/demo2/actions/workflows/backend_linter.yml">
-    <img src="https://github.com/nivalcode/demo2/actions/workflows/backend_linter.yml/badge.svg" alt="Backend linter (pylint)">
+  <a href="https://github.com/darian16/rag_demo/actions/workflows/backend_linter.yml">
+    <img src="https://github.com/darian16/rag_demo/actions/workflows/backend_linter.yml/badge.svg" alt="Backend linter (pylint)">
   </a>
-  <a href="https://github.com/nivalcode/demo2/actions/workflows/backend_tests.yml">
-    <img src="https://github.com/nivalcode/demo2/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
+  <a href="https://github.com/darian16/rag_demo/actions/workflows/backend_tests.yml">
+    <img src="https://github.com/darian16/rag_demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
   </a>
 </p>
 
@@ -49,7 +49,7 @@
 ## Overview
 This project involves developing a web application that enables users to explore, analyze, and compare two market research reports through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application must ensure all results are traceable, enabling users to navigate directly to the original source data for verification and deeper analysis.
 <div align="center">
-  <img src="https://github.com/nivalcode/demo2/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
+  <img src="https://github.com/darian16/rag_demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
 This software demonstrates Retrieval Augmented Generation (RAG) for in-context learning using specific PDF documents:
 
@@ -66,7 +66,7 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 
 ## RAG agent workflow
 <div align="center">
-  <img src="https://github.com/nivalcode/demo2/blob/develop/backend/graph.png" alt="Workflow" width="auto">
+  <img src="https://github.com/darian16/rag_demo/blob/develop/backend/graph.png" alt="Workflow" width="auto">
 </div>
 
 ## Sample of queries

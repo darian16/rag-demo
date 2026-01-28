@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -8,7 +8,9 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import ApiService from "services/ApiService";
 //------------------------------------------------------------------------------------
 
+import Logo from "ui-component/Logo";
 import Help from "ui-component/Help";
+import Github from "ui-component/Github";
 import Loading from "ui-component/Loading";
 import Typing from "ui-component/Typing";
 
@@ -22,12 +24,22 @@ const Dashboard = () => {
   const [is_generating, set_is_generating] = useState(false);
   const [scroll_bar, set_scroll_bar] = useState(null);
 
+  useEffect(() => {
+    if (messages.length === 0) {
+      document.getElementById('question').focus();
+    }
+  });
+
   const onRegisterMessage = (message) => {
     set_messages(messages => [...messages, message]);
-    if (message.kind === 'question') genResponse(message);
+
+    if (message.kind === 'question') {
+      return genResponse(message);
+    }
 
     setTimeout(function() {
       scroll_bar.scrollTop = scroll_bar.scrollHeight;
+      document.getElementById('question').focus();
     }, 250);
   }
 
@@ -35,9 +47,10 @@ const Dashboard = () => {
     set_disabled_chatbot(true);
 
     // Simulate register message on backend...
+    message.read = true;
+    set_is_generating(true);
+
     setTimeout(function() {
-      message.read = true;
-      set_is_generating(true);
       scroll_bar.scrollTop = scroll_bar.scrollHeight;
 
       // Generate message response...
@@ -74,7 +87,7 @@ const Dashboard = () => {
           set_disabled_chatbot(false);
         }
       );
-    }, 500);
+    }, 250);
   }
 
   const quitMessage = (message) => {
@@ -85,6 +98,8 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
+      <Logo />
+      <Github />
       <Help />
 
       <PerfectScrollbar containerRef={ref => set_scroll_bar(ref)}>

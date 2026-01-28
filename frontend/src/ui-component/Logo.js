@@ -1,6 +1,8 @@
+import logo from "assets/images/logo.png";
+
 const Logo = () => {
   return (
-    <img className="logo" src={'/logo.svg'} alt="Demo AI Rag" width="100" />
+    <img id="logo" src={logo} alt="EARGROUND" width="100" />
   );
 };
 

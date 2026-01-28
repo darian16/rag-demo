@@ -37,17 +37,19 @@ def genVectorStoreContext():
 
   print("Retrieving Context documents...")
 
-  files_dirs = [
-    join(os.path.dirname(__file__), 'Customs Export Procedures Manual'),
-    join(os.path.dirname(__file__), 'Customs Import Procedures Manual')
+  document_names = [
+    'Customs Export Procedures Manual',
+    'Customs Import Procedures Manual'
   ]
 
-  for x_file_dir in files_dirs:
+  home_dir = os.path.dirname(__file__)
+
+  for x_document_name in document_names:
+    x_file_dir = join(home_dir, x_document_name)
+
     for x_file in listdir(x_file_dir):
-      metadata = x_file.split('-')
-      document_name = x_file_dir
-      document_page = int(metadata[1].replace('.pdf', ''))
-      print(f'{document_name} => {document_page}')
+      x_document_page = int(x_file.split('-')[1].replace('.pdf', ''))
+      print(f'{x_document_name} => {x_document_page}')
 
       loader = PyPDFLoader(join(x_file_dir, x_file))
 
@@ -67,8 +69,8 @@ def genVectorStoreContext():
         for x_index, x_document in enumerate(documents):
           current_section = x_index+1
 
-          x_document.metadata['document_name'] = document_name
-          x_document.metadata['document_page'] = document_page
+          x_document.metadata['document_name'] = x_document_name
+          x_document.metadata['document_page'] = x_document_page
           x_document.metadata['page_section_percent'] = f'{calc_int_percent(prev_section, sections_count)}-{calc_int_percent(current_section, sections_count)}'
 
           prev_section = current_section

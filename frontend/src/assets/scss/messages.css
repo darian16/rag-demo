@@ -171,6 +171,10 @@
   transition: all ease 0.25s;
 }
 
+.message.response .content.fixed-content {
+  cursor: default;
+}
+
 ul.context_sources {
   padding-left: 0;
 }
