@@ -20,14 +20,18 @@ from langgraph.graph import StateGraph
 class GraphStateSandBox(BaseModel):
   sandbox: int = 1
   question: str = ""
-  documents: list = []
+  question_rewritten: bool = False
+  context_documents: list = []
+  relevant_documents: list = []
   generation: str = ""
 # -------------------------------------------------------------
 
 class GraphState(BaseModel):
   sandbox: int = 0
   question: str = ""
-  documents: list = []
+  question_rewritten: bool = False
+  context_documents: list = []
+  relevant_documents: list = []
   generation: str = ""
 
   llm: ChatOpenAI = None
@@ -50,28 +54,66 @@ def getVectorStoreContext():
     embedding_function=gpt_embebber
   )
 
-  return vectorstore.as_retriever(search_kwargs={"k": 3})
+  return vectorstore.as_retriever(search_kwargs={"k": 5})
 # -------------------------------------------------------------
 
 def get_context_grading_chain(llm):
   prompt = ChatPromptTemplate.from_template(
-    """You are a grader assessing relevance 
-    of a retrieved document to a user question. If the document contains keywords related to the user question, grade it as relevant. \n
-    It does not need to be a stringent test. The goal is to filter out erroneous retrievals. \n
-    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question. \n
-    Provide the binary score as a JSON with a single key 'score' and no premable or explaination.
-    Here is the retrieved document: \n\n {context} \n\n
-    Here is the user question: {question}"""
+    """You are a grader assessing whether a retrieved document is relevant to a user question.
+
+    DOCUMENT:
+    {context}
+
+    QUESTION:
+    {question}
+
+    INSTRUCTIONS:
+    - Grade RELEVANCE: Does the document contain information that can help answer the question?
+    - Use a LENIENT standard. Grade as relevant if the document contains ANY information related to the question.
+    - Goal: Filter out completely irrelevant documents.
+    - Respond with a JSON object containing a single key "score" with value "yes" or "no".
+    - Do NOT include any other text or explanation.
+
+    OUTPUT FORMAT:
+    {{"score": "yes"}} OR {{"score": "no"}}"""
   )
 
   return prompt | llm | JsonOutputParser()
+# -------------------------------------------------------------
+
+def get_rewrite_question_chain(llm):
+  prompt = ChatPromptTemplate.from_template(
+    """You are optimizing a question for better document retrieval in customs/import/export domain.
+
+    ORIGINAL QUESTION: {question}
+    DOMAIN CONTEXT: {context}
+
+    REQUIREMENTS:
+    1. MUST INCLUDE ALL KEYWORDS from the original question
+    2. Can add 1-2 relevant domain terms (customs, tariff, declaration, compliance, etc.)
+    3. Can rephrase for clarity or better structure
+    4. Keep it concise (1 sentence preferred, max 2 sentences)
+
+    EXAMPLE 1:
+    Original: "import tax"
+    Keywords to preserve: "import", "tax"
+    Rewritten: "What are the import taxes and customs duties for international shipments?"
+
+    EXAMPLE 2:
+    Original: "empty?"
+    Keywords to preserve: "empty"
+    Rewritten: "How to declare empty containers?"
+
+    YOUR REWRITE:"""
+  )
+
+  return prompt | llm | StrOutputParser()
 # -------------------------------------------------------------
 
 def get_rag_search_chain(llm):
   prompt = ChatPromptTemplate.from_template(
     """You are an assistant for question-answering tasks. \n
     Use the following pieces of retrieved context to answer the question. \n
-    If you don't know the answer, just say that you don't know. \n
     Use three sentences maximum and keep the answer concise. \n
     Question: {question} \n 
     Context: {context} \n
@@ -89,28 +131,41 @@ def context_retriever_node(state):
     print("---context vectorial database does not exists---")
     return state
 
-  state.documents = retriever.invoke(state.question)
-  print(f'---documents count: {len(state.documents)}---')
+  state.context_documents = retriever.invoke(state.question)
+  state.relevant_documents = []
+  print(f'---documents count: {len(state.context_documents)}---')
 
   return state
 # -------------------------------------------------------------
 
 def context_grading_node(state):
   print("---context_grading_node---")
-  relevant_documents = []
+  state.relevant_documents = []
 
-  for x_document in state.documents:
+  for x_document in state.context_documents:
     if state.sandbox == 1:
-      relevant_documents.append(x_document)
+      state.relevant_documents.append(x_document)
     else:
       chain = get_context_grading_chain(state.llm)
       response = chain.invoke({"question": state.question, "context": x_document.page_content})
       print(f'---context documents: {response["score"]}---')
 
       if response['score'] == "yes":
-        relevant_documents.append(x_document)
+        state.relevant_documents.append(x_document)
 
-  state.documents = relevant_documents
+  return state
+# -------------------------------------------------------------
+
+def rewrite_question_node(state):
+  print("---rewrite_question_node---")
+
+  context = ". ".join([x_document.page_content for x_document in state.context_documents])
+  chain = get_rewrite_question_chain(state.llm)
+  response = chain.invoke({"question": state.question, "context": context})
+  print(f'---new_question: {response}---')
+
+  state.question_rewritten = True
+  state.question = response
   return state
 # -------------------------------------------------------------
 
@@ -120,7 +175,7 @@ def rag_search_node(state):
   if state.sandbox == 1:
     state.generation = "Automatic sandbox response."
   else:
-    context = "\n\n".join([x_document.page_content for x_document in state.documents])
+    context = "\n\n".join([x_document.page_content for x_document in state.relevant_documents])
     chain = get_rag_search_chain(state.llm)
     response = chain.invoke({"question": state.question, "context": context})
     state.generation = response
@@ -131,7 +186,7 @@ def rag_search_node(state):
 def dont_know_node(state):
   print("---dont_know_node---")
 
-  state.generation = "I don't know. Perhaps your query is not associated with my context knowledge?"
+  state.generation = "I don't know. Perhaps your question is not related with my context knowledge?"
   return state
 # -------------------------------------------------------------
 
@@ -148,6 +203,7 @@ def chatToLlm(question, sandbox):
 
   graph.add_node("context_retriever_node", context_retriever_node)
   graph.add_node("context_grading_node", context_grading_node)
+  graph.add_node("rewrite_question_node", rewrite_question_node)
   graph.add_node("rag_search_node", rag_search_node)
   graph.add_node("dont_know_node", dont_know_node)
 
@@ -155,22 +211,24 @@ def chatToLlm(question, sandbox):
 
   graph.add_conditional_edges(
     "context_retriever_node",
-    lambda state: "context_grading_node" if len(state.documents) > 0 else "dont_know_node",
+    lambda state: "Question is in context" if len(state.context_documents) > 0 else "Question is out of context",
     {
-      "context_grading_node": "context_grading_node",
-      "dont_know_node": "dont_know_node",
+      "Question is out of context": "dont_know_node",
+      "Question is in context": "context_grading_node"
     },
   )
 
   graph.add_conditional_edges(
     "context_grading_node",
-    lambda state: "rag_search_node" if len(state.documents) > 0 else "dont_know_node",
+    lambda state: "Relevant context found" if len(state.relevant_documents) > 0 else ("Unknown knowledge for rewritten question" if state.question_rewritten else "Unknown knowledge for original question"),
     {
-      "rag_search_node": "rag_search_node",
-      "dont_know_node": "dont_know_node",
+      "Relevant context found": "rag_search_node",
+      "Unknown knowledge for original question": "rewrite_question_node",
+      "Unknown knowledge for rewritten question": "dont_know_node"
     },
   )
 
+  graph.add_edge("rewrite_question_node", "context_retriever_node")
   graph.add_edge("rag_search_node", END)
   graph.add_edge("dont_know_node", END)
 
@@ -185,6 +243,6 @@ def chatToLlm(question, sandbox):
 
   return {
     'response': result['generation'],
-    'context_sources': result['documents']
+    'context_sources': result['relevant_documents']
   }
 # -------------------------------------------------------------

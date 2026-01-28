@@ -29,3 +29,5 @@ yarn-error.log*
 dev.Dockerfile
 apt_proxy.conf
 package-lock.json
+
+frontend.env

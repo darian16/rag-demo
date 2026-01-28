@@ -10,14 +10,9 @@ const Message = ({message, onQuit}) => {
   const [show_context_sources, set_show_context_sources] = useState(false);
 
   const ContextSource = ({source}) => {
-    let docs = {
-      '2023-conocophillips-aim-presentation.pdf': '2023 AIM Presentation',
-      '2024-conocophillips-proxy-statement.pdf': '2024 Proxy Statement',
-    }
-    
     return (
       <li>
-        <b>Document:</b> { docs[source.metadata.document_name] },&nbsp;
+        <b>Document:</b> { source.metadata.document_name },&nbsp;
         <b>Page:</b> { source.metadata.document_page },&nbsp;
         <b>Estimated section:</b> { source.metadata.page_section_percent }
         <br/>
@@ -44,17 +39,26 @@ const Message = ({message, onQuit}) => {
       <div id={message.id} className={"message " + message.kind}>
         {
           message.context_sources &&
+          message.context_sources.length > 0 &&
           <p className="content" 
             data-tooltip-id={"context_sources-tooltip-" + message.id} 
-            data-tooltip-html={show_context_sources ? "Double clic to Hide context sources" : "Double clic to Show context sources"}
+            data-tooltip-html={show_context_sources ? "Click to Hide context sources" : "Click to Show context sources"}
             dangerouslySetInnerHTML={{__html: message.content }}
-            onDoubleClick={() => set_show_context_sources(!show_context_sources)}>
+            onClick={() => set_show_context_sources(!show_context_sources)}>
           </p>
         }
         
         {
           !message.context_sources &&
-          <p className="content" 
+          <p className="content fixed-content" 
+            dangerouslySetInnerHTML={{__html: message.content }}>
+          </p>
+        }
+
+        {
+          message.context_sources &&
+          message.context_sources.length === 0 &&
+          <p className="content fixed-content" 
             dangerouslySetInnerHTML={{__html: message.content }}>
           </p>
         }

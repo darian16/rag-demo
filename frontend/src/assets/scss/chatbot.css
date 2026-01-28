@@ -133,6 +133,7 @@ main {
 .scrollbar-container {
   display: flex;
   justify-content: center;
+  margin-top: 25px;
 }
 
 #demo-ai-rag-container {
@@ -146,7 +147,7 @@ main {
 }
 
 .bottom-padding {
-  margin: 50px;
+  margin: 120px;
 }
 
 @media (max-width: 875px) {
