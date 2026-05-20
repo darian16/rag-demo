@@ -2,7 +2,7 @@
   <img src="https://github.com/darian16/rag_demo/blob/master/.github/assets/logo.png" alt="Earground" width="300px">
   <br>
   <h1><img width="40px" src="https://github.com/darian16/rag_demo/blob/master/.github/assets/icon.svg" alt="Icon"> RAG-powered AIS AES analysis tool</h1>
-  <strong>Demo for the project Earground</strong>
+  <strong>Demo for the project Earground (live: https://rag-demo-33b16.web.app)</strong>
 </div>
 <br>
 <p align="center">
