@@ -47,7 +47,7 @@
   - [Backend Severless settings recommendations](#backend-severless-settings-recommendations)
 
 ## Overview
-This project involves developing a web application that enables users to explore, analyze, and compare two market research reports through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application must ensure all results are traceable, enabling users to navigate directly to the original source data for verification and deeper analysis.
+This project involves developing a web application that enables users to explore, analyze, and compare two documents from Revenue Customs through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application must ensure all results are traceable, enabling users to navigate directly to the original source data for verification and deeper analysis.
 <div align="center">
   <img src="https://github.com/darian16/rag_demo/blob/master/.github/assets/preview.png" alt="Preview" width="90%">
 </div>
@@ -75,6 +75,7 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 - *What are the time limits for lodging export declaration?*
 - *What is the Windsor Framework?*
 - *Give me the differences between manifests for ships departing to any country and to another EU country.*
+- *Empy containers?*
 
 ## Services topology diagram
 <div align="center">
