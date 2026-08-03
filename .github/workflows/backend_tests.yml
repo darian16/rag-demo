@@ -2,6 +2,7 @@ name: Backend tests (pytest)
 on: [pull_request]
 env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 defaults:
   run:
     working-directory: ./backend

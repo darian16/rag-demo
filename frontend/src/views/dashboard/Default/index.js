@@ -9,6 +9,7 @@ import ApiService from "services/ApiService";
 //------------------------------------------------------------------------------------
 
 import Logo from "ui-component/Logo";
+import NewChat from "ui-component/NewChat";
 import Help from "ui-component/Help";
 import Github from "ui-component/Github";
 import Loading from "ui-component/Loading";
@@ -38,7 +39,7 @@ const Dashboard = () => {
     }
 
     setTimeout(function() {
-      scroll_bar.scrollTop = scroll_bar.scrollHeight;
+      if (scroll_bar) scroll_bar.scrollTop = scroll_bar.scrollHeight;
       document.getElementById('question').focus();
     }, 250);
   }
@@ -51,7 +52,7 @@ const Dashboard = () => {
     set_is_generating(true);
 
     setTimeout(function() {
-      scroll_bar.scrollTop = scroll_bar.scrollHeight;
+      if (scroll_bar) scroll_bar.scrollTop = scroll_bar.scrollHeight;
 
       // Generate message response...
       let params = {
@@ -68,6 +69,8 @@ const Dashboard = () => {
             kind: 'response',
             content: response.response,
             context_sources: response.context_sources,
+            question_rewritten: response.question_rewritten,
+            new_question: response.new_question,
             read: true
           });
 
@@ -81,6 +84,8 @@ const Dashboard = () => {
             kind: 'response',
             content: 'Our servers are busy right now. Try again in a few seconds.',
             context_sources: null,
+            question_rewritten: false,
+            new_question: null,
             read: true
           });
 
@@ -96,11 +101,32 @@ const Dashboard = () => {
     );
   }
 
+  const sendQuery = (query, submit=true) => {
+    const input = document.getElementById('question');
+    if (!input || input.disabled) return;
+    
+    input.value = query;
+    const event = new Event('input', { bubbles: true });
+    input.dispatchEvent(event);
+
+    if (!submit) return;
+
+    setTimeout(() => {
+      document.getElementById('send-button')?.click();
+    }, 250);
+  }
+
   return (
     <React.Fragment>
       <Logo />
+
+      {
+        messages && messages.length > 0 &&
+        <NewChat onNewChat={() => set_messages([])} />
+      }
+
       <Github />
-      <Help />
+      <Help sendQuery={sendQuery} />
 
       <PerfectScrollbar containerRef={ref => set_scroll_bar(ref)}>
         <div id="demo-ai-rag-container">
@@ -120,7 +146,7 @@ const Dashboard = () => {
             messages.length > 0 &&
             messages.map((x_message, index) => {
               return (
-                <Message key={x_message.id} message={x_message} onQuit={() => quitMessage(x_message)} />
+                <Message key={x_message.id} message={x_message} sendQuery={sendQuery} onQuit={() => quitMessage(x_message)} />
               )
             })
           }
@@ -142,7 +168,7 @@ const Dashboard = () => {
 
       {
         messages &&
-        <ChatBot show_welcome={messages.length === 0} onRegisterMessage={onRegisterMessage} disabled={disabled_chatbot} />
+        <ChatBot show_welcome={messages.length === 0} onRegisterMessage={onRegisterMessage} sendQuery={sendQuery} disabled={disabled_chatbot} />
       }
     </React.Fragment>
   );
