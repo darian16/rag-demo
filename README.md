@@ -55,7 +55,7 @@
 ## Overview
 This project involves developing a web application that enables users to explore and analyze Customs Import Procedures and Customs Export Procedures through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application ensures all results are traceable, enabling users to navigate directly to the original source data for verification and deeper analysis.
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/df1c7bd6-4f42-4f61-9914-7211b335b25c" alt="Preview 1" width="70%">
+  <img src="https://github.com/user-attachments/assets/e66c6642-455b-4ae2-b8ce-1fa77e8c0003" alt="Preview 1" width="70%">
 </div>
 
 This software demonstrates Retrieval Augmented Generation (RAG) for in-context learning using specific PDF documents:
@@ -91,7 +91,7 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 ### Earground
 ✅
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/5e69cefd-7705-4575-99ad-2495c0bc63e3" alt="Preview Earground" width="70%">
+  <img src="https://github.com/user-attachments/assets/2ebaf722-3c53-44c9-9c3b-ab73873e2011" alt="Preview Earground" width="70%">
 </div>
 
 ### ChatGPT
