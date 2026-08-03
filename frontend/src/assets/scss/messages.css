@@ -6,6 +6,7 @@
 .message.question {
   float: right;
   width: max-content;
+  min-width: 200px;
   max-width: 70%;
   background: var(--secondary_color);
   color: white;
@@ -63,12 +64,39 @@
   outline: none !important;
 }
 
-.message.response .content-action:hover {
+.message.question .content-action {
+  position: absolute;
+  width: max-content;
+  font-size: 18px;
+  color: white !important;
+  top: unset !important;
+  bottom: 8px;
+  left: 35px;
+  cursor: pointer;
+  opacity: 0.75;
+  outline: none !important;
+}
+
+.message .content-action:hover {
   opacity: 1;
 }
 
 .message.response .content-copy {
   left: 30px;
+}
+
+.message.question .content-copy {
+  font-size: 14px;
+  left: 40px;
+  margin-bottom: 2px;
+}
+
+.message.question .content-edit {
+  left: 61px !important;
+}
+
+.message.question .content-retry {
+  left: 85px !important;
 }
 
 .message.response .content-share {
@@ -99,6 +127,8 @@
   margin: 0;
   padding: 0;
   margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
 .message .close {
@@ -153,7 +183,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--neutral_color);
+  color: var(--secondary_color);
 }
 
 .typing img {
@@ -193,4 +223,26 @@ ul.context_sources p {
   margin-top: 5px;
   font-style: italic;
   opacity: 0.85;
+}
+
+.message.response .content-action.import,
+.message.response .content-action.export {
+  position: relative;
+  bottom: unset;
+  cursor: default;
+  opacity: 0.75;
+  outline: none !important;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: -4px;
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--secondary_color) !important;
+}
+
+.message.response p.context-types-indicator {
+  margin-top: 9px;
+  margin-bottom: 0;
+  color: var(--tooltip_color);
+  font-style: italic;
 }

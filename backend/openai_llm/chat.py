@@ -9,6 +9,7 @@ from os.path import join
 from langchain_chroma import Chroma
 from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
 from langchain_core.runnables.graph import MermaidDrawMethod
@@ -34,14 +35,15 @@ class GraphState(BaseModel):
   relevant_documents: list = []
   generation: str = ""
 
-  llm: ChatOpenAI = None
+  llm_open_ai: ChatOpenAI = None
+  llm_google_ai: ChatGoogleGenerativeAI = None
 # -------------------------------------------------------------
 
-def getLlmModel(sandbox):
-  if sandbox == 1:
-    return None
-
-  return ChatOpenAI(model="gpt-4o", temperature=0)
+def getLlmModels():
+  return {
+    'llm_open_ai': ChatOpenAI(model="gpt-4o", temperature=0),
+    'llm_google_ai': ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, convert_system_message_to_human=True)
+  }
 # -------------------------------------------------------------
 
 def getVectorStoreContext():
@@ -54,7 +56,7 @@ def getVectorStoreContext():
     embedding_function=gpt_embebber
   )
 
-  return vectorstore.as_retriever(search_kwargs={"k": 5})
+  return vectorstore.as_retriever(search_kwargs={"k": 10})
 # -------------------------------------------------------------
 
 def get_context_grading_chain(llm):
@@ -112,12 +114,22 @@ def get_rewrite_question_chain(llm):
 
 def get_rag_search_chain(llm):
   prompt = ChatPromptTemplate.from_template(
-    """You are an assistant for question-answering tasks. \n
-    Use the following pieces of retrieved context to answer the question. \n
-    Use three sentences maximum and keep the answer concise. \n
-    Question: {question} \n 
-    Context: {context} \n
-    Answer:"""
+    """You are an assistant for question-answering tasks.
+    Use the following pieces of retrieved context to answer the question.
+    
+    IMPORTANT FORMATTING INSTRUCTIONS:
+    - Format your entire response as basic HTML inside a <div> tag.
+    - Use <p> for paragraphs, <ul>/<li> for lists, <strong> for bold, <br> for line breaks.
+    - Use emoji icons (e.g., ✅, 📦, ⚠️, ℹ️, 📋) to make the response visually engaging.
+    - DO NOT use Markdown symbols like *, **, -, or _ for formatting.
+    - DO NOT use numbered lists with "1.", "2." — use <ul> instead.
+    - DO NOT use any separator lines like "---" or "***".
+    - Keep the HTML clean and simple — no CSS, no scripts.
+    
+    Question: {question}
+    Context: {context}
+    
+    Answer (as HTML only, starting with <div>):"""
   )
 
   return prompt | llm | StrOutputParser()
@@ -146,7 +158,7 @@ def context_grading_node(state):
     if state.sandbox == 1:
       state.relevant_documents.append(x_document)
     else:
-      chain = get_context_grading_chain(state.llm)
+      chain = get_context_grading_chain(state.llm_google_ai)
       response = chain.invoke({"question": state.question, "context": x_document.page_content})
       print(f'---context documents: {response["score"]}---')
 
@@ -160,7 +172,7 @@ def rewrite_question_node(state):
   print("---rewrite_question_node---")
 
   context = ". ".join([x_document.page_content for x_document in state.context_documents])
-  chain = get_rewrite_question_chain(state.llm)
+  chain = get_rewrite_question_chain(state.llm_open_ai)
   response = chain.invoke({"question": state.question, "context": context})
   print(f'---new_question: {response}---')
 
@@ -176,7 +188,7 @@ def rag_search_node(state):
     state.generation = "Automatic sandbox response."
   else:
     context = "\n\n".join([x_document.page_content for x_document in state.relevant_documents])
-    chain = get_rag_search_chain(state.llm)
+    chain = get_rag_search_chain(state.llm_google_ai)
     response = chain.invoke({"question": state.question, "context": context})
     state.generation = response
 
@@ -199,7 +211,8 @@ def chatToLlm(question, sandbox):
     state = {"question": question}
   else:
     graph = StateGraph(GraphState)
-    state = {"llm": getLlmModel(sandbox), "question": question}
+    llms = getLlmModels()
+    state = {"llm_google_ai": llms['llm_google_ai'], "llm_open_ai": llms['llm_open_ai'], "question": question}
 
   graph.add_node("context_retriever_node", context_retriever_node)
   graph.add_node("context_grading_node", context_grading_node)
@@ -243,6 +256,8 @@ def chatToLlm(question, sandbox):
 
   return {
     'response': result['generation'],
-    'context_sources': result['relevant_documents']
+    'context_sources': result['relevant_documents'],
+    'question_rewritten': result['question_rewritten'],
+    'new_question': result['question'] if result['question_rewritten'] else None
   }
 # -------------------------------------------------------------

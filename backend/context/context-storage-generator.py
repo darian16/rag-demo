@@ -2,7 +2,7 @@ import os
 from os import listdir
 from os.path import join
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
@@ -14,10 +14,11 @@ def calc_int_percent(value, total):
 # -------------------------------------------------------------
 
 def genVectorStoreContext():
-  vectorial_dir = join(os.path.dirname(__file__))
+  vectorial_dir = os.path.dirname(__file__)
   collection_name = 'store'
   gpt_embebber = GPT4AllEmbeddings(gpt4all_kwargs= {'allow_download':False})
 
+  # Return vectorial database file if exists...
   if os.path.isfile(join(vectorial_dir, 'chroma.sqlite3')):
     print("Context vectorial database already exists!")
 
@@ -25,8 +26,9 @@ def genVectorStoreContext():
       persist_directory=vectorial_dir,
       collection_name=collection_name,
       embedding_function=gpt_embebber
-    ).as_retriever()
+    ).as_retriever(search_kwargs={"k": 10})
 
+  # Creating vectorial database file...
   print("Creating vectorial database file...")
 
   vectorstore = Chroma(
@@ -42,21 +44,22 @@ def genVectorStoreContext():
     'Customs Import Procedures Manual'
   ]
 
-  home_dir = os.path.dirname(__file__)
+  os.environ["TIKTOKEN_CACHE_DIR"] = os.path.join(vectorial_dir, "tiktoken_cache")
+
+  text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+    chunk_size=250,
+    chunk_overlap=25,
+    encoding_name="cl100k_base"
+  )
 
   for x_document_name in document_names:
-    x_file_dir = join(home_dir, x_document_name)
+    x_file_dir = join(vectorial_dir, x_document_name)
 
     for x_file in listdir(x_file_dir):
       x_document_page = int(x_file.split('-')[1].replace('.pdf', ''))
       print(f'{x_document_name} => {x_document_page}')
 
       loader = PyPDFLoader(join(x_file_dir, x_file))
-
-      text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-        chunk_size=250,
-        chunk_overlap=25
-      )
 
       documents = []
       documents.extend(loader.load())
@@ -83,10 +86,10 @@ def genVectorStoreContext():
   print("")
   print("")
 
-  return vectorstore.as_retriever()
+  return vectorstore.as_retriever(search_kwargs={"k": 10})
 # -------------------------------------------------------------
 
 retriever = genVectorStoreContext()
-documents = retriever.invoke("Please tell me how to declare the goods")
+documents = retriever.invoke("What are the differences between declarations for UK and EU trades?")
 print(f'Related documents for test question: {len(documents)}')
 # -------------------------------------------------------------

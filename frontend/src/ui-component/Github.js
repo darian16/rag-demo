@@ -7,7 +7,7 @@ const Github = () => {
   return (
     <React.Fragment>
       <div id="github">
-        <a href="https://github.com/darian16/rag_demo" target="_blank" rel="noreferrer">
+        <a href="https://github.com/nivalcode/demo2" target="_blank" rel="noreferrer">
           <img src={github} alt="Github" width="100" data-tooltip-id="github-tooltip" data-tooltip-html="Github repository" />
         </a>
       </div>
