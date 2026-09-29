@@ -1,3 +1,4 @@
+
 <div align="center">
   <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/logo.png" alt="Earground" width="300px">
   <br>
@@ -55,7 +56,7 @@
 ## Overview
 This project involves developing a web application that enables users to explore and analyze Customs Import Procedures and Customs Export Procedures through AI-powered natural language interactions. The system architecture consists of a Python backend built with FastAPI, which serves as the bridge between the frontend interface and a Retrieval-Augmented Generation (RAG) system. The RAG system leverages advanced techniques such as vector embeddings, semantic search, and prompt engineering to retrieve relevant information from the reports and generate insightful, contextual responses. The application ensures all results are traceable, enabling users to navigate directly to the original source data for verification and deeper analysis.
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/e66c6642-455b-4ae2-b8ce-1fa77e8c0003" alt="Preview 1" width="70%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/preview.png" alt="Preview 1" width="70%">
 </div>
 
 This software demonstrates Retrieval Augmented Generation (RAG) for in-context learning using specific PDF documents:
@@ -74,7 +75,7 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 
 ## RAG agent workflow
 <div align="center">
-  <img src="https://github.com/darian16/rag-demo/blob/develop/backend/graph.png" alt="Workflow" width="auto">
+  <img src="https://github.com/darian16/rag-demo/blob/master/backend/graph.png" alt="Workflow" width="auto">
 </div>
 
 ## Sample of queries
@@ -91,25 +92,25 @@ This software demonstrates Retrieval Augmented Generation (RAG) for in-context l
 ### Earground
 ✅
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/2ebaf722-3c53-44c9-9c3b-ab73873e2011" alt="Preview Earground" width="70%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/earground_example.png" alt="Preview Earground" width="70%">
 </div>
 
 ### ChatGPT
 ❌
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/571e55e0-5015-463f-9293-1601e2d67ad6" alt="Preview ChatGPT" width="70%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/chatgpt_example.png" alt="Preview ChatGPT" width="70%">
 </div>
 
 ### Claude
 ❌
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/c9f03e1d-b49c-49ef-8669-37c944ed6471" alt="Preview Claude" width="70%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/claude_example.png" alt="Preview Claude" width="70%">
 </div>
 
 ### Gemini
 ❌
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/0551e2bf-9263-47f8-8219-06f4500752dc" alt="Preview Gemini" width="70%">
+  <img src="https://github.com/darian16/rag-demo/blob/master/.github/assets/gemini_example.png" alt="Preview Gemini" width="70%">
 </div>
 </div>
 
