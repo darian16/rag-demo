@@ -1,4 +1,4 @@
-name: Frontend deploy to Firebase Hosting for production on merge to master
+name: CI/CD
 'on':
   push:
     branches:
