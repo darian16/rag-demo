@@ -29,6 +29,9 @@
   <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
   </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_firebase.yml">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/frontend_firebase.yml/badge.svg" alt="CI/CD">
+  </a>
 </p>
 
 ## Table of Contents
