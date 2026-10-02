@@ -2,9 +2,7 @@ name: CI/CD (Backend)
 on:
   check_run:
     types: [completed]
-defaults:
-  run:
-    working-directory: /backend
+
 jobs:
   mirror:
     if: startsWith(github.event.check_run.name, 'rmgpgab-backend-us-west1-nivalcode-demo2--mastsmu')
