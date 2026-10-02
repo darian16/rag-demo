@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD (Frontend)
 'on':
   push:
     branches:
@@ -19,13 +19,13 @@ jobs:
             firebaseServiceAccount: FIREBASE_SERVICE_ACCOUNT
             projectId: rag-demo-33b16
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Use Node.js 20.10.0
-        uses: actions/setup-node@v2
+      - name: Use Node.js version 22
+        uses: actions/setup-node@v7
         with:
-          node-version: 20.10.0
+          node-version: 22
       - name: yarn install and build
         run: yarn install && yarn run build && rm -f ./build/precache-manifest.*.js && cp ./firebase.env.js ./build/env.js
       - uses: FirebaseExtended/action-hosting-deploy@v0

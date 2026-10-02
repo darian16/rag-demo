@@ -1,0 +1,14 @@
+name: CI/CD (Backend)
+on:
+  check_run:
+    types: [completed]
+
+jobs:
+  mirror:
+    if: startsWith(github.event.check_run.name, 'rmgpgab-backend-us-west1-nivalcode-demo2--mastsmu')
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Mirror Cloud Build result
+        run: |
+          echo "Cloud Build conclusion: ${{ github.event.check_run.conclusion }}"
+          [ "${{ github.event.check_run.conclusion }}" = "success" ]
