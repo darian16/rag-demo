@@ -16,4 +16,4 @@ grandalf == 0.8
 pytest == 9.0.3
 pytest-cov == 6.0.0
 ipython == 8.32.0
-pylint == 3.3.4
+pylint == 4.0.9
