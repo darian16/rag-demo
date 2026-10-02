@@ -8,10 +8,10 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Diagram auto-generator
       run: |
         docker run --rm --tty -v $PWD:/data dbeniamine/docker-compose-viz-mermaid -v -p -v -dLR -M -otopology.svg
-    - uses: stefanzweifel/git-auto-commit-action@v5
+    - uses: stefanzweifel/git-auto-commit-action@v7
       with:
         commit_message: Add new diagram

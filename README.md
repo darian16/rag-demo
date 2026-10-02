@@ -16,8 +16,8 @@
   <a href="https://github.com/darian16/rag-demo/blob/master/README.md">
     <img src="https://img.shields.io/badge/Documentation-Readme.md-blue.svg" alt="Documentation (Readme.md)">
   </a>
-  <a href="https://github.com/darian16/rag-demo/security/dependabot">
-    <img src="https://img.shields.io/badge/Dependencies-Dependabot-blue.svg" alt="Dependencies (Dependabot)">
+  <a href="https://github.com/darian16/rag-demo/releases">
+    <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg" alt="Version (1.0.0)">
   </a>
   </br>
   <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_linter.yml">
@@ -28,6 +28,15 @@
   </a>
   <a href="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml">
     <img src="https://github.com/darian16/rag-demo/actions/workflows/backend_tests.yml/badge.svg" alt="Tests (pytest)">
+  </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/dependabot/dependabot-updates">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/dependabot/dependabot-updates/badge.svg" alt="Dependabot">
+  </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/frontend_firebase.yml">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/frontend_firebase.yml/badge.svg" alt="CI/CD (Frontend)">
+  </a>
+  <a href="https://github.com/darian16/rag-demo/actions/workflows/cloud-build-status.yml">
+    <img src="https://github.com/darian16/rag-demo/actions/workflows/cloud-build-status.yml/badge.svg" alt="CI/CD (Backend)">
   </a>
 </p>
 

@@ -1,0 +1,65 @@
+version: 2
+updates:
+  # ---------- Backend: FastAPI (Python) ----------
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Dublin"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "backend"
+      - "python"
+    commit-message:
+      prefix: "chore(backend)"
+    groups:
+      # FastAPI, Starlette and Pydantic must stay compatible
+      fastapi-stack:
+        patterns:
+          - "fastapi"
+          - "starlette"
+          - "pydantic"
+          - "pydantic-settings"
+          - "pydantic-core"
+          - "uvicorn"
+      python-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ---------- GitHub Actions (always at root) ----------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # ---------- Dockerfiles (remove if not used) ----------
+  - package-ecosystem: "docker"
+    directories:
+      - "/backend"
+      - "/frontend"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+    ignore:
+      # Optional: skip Python/Node version jumps in base images, keep patches
+      - dependency-name: "python"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
