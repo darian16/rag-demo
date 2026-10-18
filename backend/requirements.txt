@@ -14,6 +14,6 @@ gpt4all == 2.8.2
 pysqlite3-binary; platform_system != "Windows"
 grandalf == 0.8
 pytest == 9.0.3
-pytest-cov == 6.0.0
+pytest-cov == 7.1.0
 ipython == 8.32.0
 pylint == 3.3.4
